@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/spring-13-Data-CinemaLab/Spring-Data-CinemaLab.iml" filepath="$PROJECT_DIR$/spring-13-Data-CinemaLab/Spring-Data-CinemaLab.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/spring-training-cinema-lab.iml" filepath="$PROJECT_DIR$/.idea/spring-training-cinema-lab.iml" />
+    </modules>
+  </component>
+</project>
