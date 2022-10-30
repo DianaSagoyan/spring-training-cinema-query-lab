@@ -2,20 +2,21 @@ package com.cydeo;
 
 import com.cydeo.repository.AccountRepository;
 import com.cydeo.repository.CinemaRepository;
+import com.cydeo.repository.GenreRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-
-import java.math.BigInteger;
 
 @Component
 public class QueryDemo implements CommandLineRunner {
 
     private final AccountRepository accountRepository;
     private final CinemaRepository cinemaRepository;
+    private final GenreRepository genreRepository;
 
-    public QueryDemo(AccountRepository accountRepository, CinemaRepository cinemaRepository) {
+    public QueryDemo(AccountRepository accountRepository, CinemaRepository cinemaRepository, GenreRepository genreRepository) {
         this.accountRepository = accountRepository;
         this.cinemaRepository = cinemaRepository;
+        this.genreRepository = genreRepository;
     }
 
     @Override
@@ -33,5 +34,10 @@ public class QueryDemo implements CommandLineRunner {
 //        System.out.println("Cinema name: " + cinemaRepository.retrieveCinemaWithId(BigInteger.valueOf(10))); //?ERROR
         System.out.println("Cinema by location: " + cinemaRepository.retrieveCinemaByLocationCountry("United States"));
         System.out.println("Select distinct: " + cinemaRepository.retrieveDistinct());
+
+
+        System.out.println("------------------Genre---------------------");
+        System.out.println("All genres: " + genreRepository.retrieveAll());
+        System.out.println("Genre where name contains: " + genreRepository.retrieveGenresByContainingName("rr"));
     }
 }

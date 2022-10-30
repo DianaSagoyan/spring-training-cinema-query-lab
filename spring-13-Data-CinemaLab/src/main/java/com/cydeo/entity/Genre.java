@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 
 @Entity
-@NoArgsConstructor   //BREAK TILL 12:10
+@NoArgsConstructor
 @Data
 public class Genre extends BaseEntity {
 
