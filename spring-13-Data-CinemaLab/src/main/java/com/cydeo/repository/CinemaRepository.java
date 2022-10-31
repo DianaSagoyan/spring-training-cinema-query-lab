@@ -31,7 +31,7 @@ public interface CinemaRepository extends JpaRepository<Cinema, Long> {
 
     //Write a JPQL query to read the cinema name with a specific id
     @Query("select c.name from Cinema c where c.id = ?1") //?    ERROR
-    String retrieveCinemaWithId(BigInteger id);
+    String retrieveCinemaWithId(Long id);
 
 
     // ------------------- Native QUERIES ------------------- //
@@ -42,7 +42,7 @@ public interface CinemaRepository extends JpaRepository<Cinema, Long> {
 
 
     //Write a native query to read all cinemas by name or sponsored name contains a specific pattern
-    @Query(nativeQuery = true, value = "select * from cinema where name contains ?1 or where sponsored_name contains ?1")
+    @Query(nativeQuery = true, value = "select * from cinema where name like %?1% or where sponsored_name like %?1%")
     List<Cinema> retrieveCinemaWithPattern(String pattern);
 
     //Write a native query to sort all cinemas by name

@@ -31,7 +31,7 @@ public class QueryDemo implements CommandLineRunner {
 
         System.out.println("------------------Cinema---------------------");
         System.out.println("Cinema by country: " + cinemaRepository.findByLocation_Country("United States"));
-//        System.out.println("Cinema name: " + cinemaRepository.retrieveCinemaWithId(BigInteger.valueOf(10))); //?ERROR
+        System.out.println("Cinema name: " + cinemaRepository.retrieveCinemaWithId(10l));
         System.out.println("Cinema by location: " + cinemaRepository.retrieveCinemaByLocationCountry("United States"));
         System.out.println("Select distinct: " + cinemaRepository.retrieveDistinct());
 
