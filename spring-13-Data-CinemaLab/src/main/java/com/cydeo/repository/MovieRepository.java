@@ -22,7 +22,7 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
 
 
     //Write a derived query to list all movies where duration exists in the specific list of duration
-    List<Movie> findByDurationExists(int duration);
+    List<Movie> findByDurationExists(List<Integer> duration);
 
 
     //Write a derived query to list all movies with higher than a specific release date
@@ -63,7 +63,7 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
 
 
     //Write a native query to list the top 5 most expensive movies
-    @Query(nativeQuery = true, value = "select top 5 from movie order by price ")
+    @Query(nativeQuery = true, value = "select * from movie order by price desc limit 5")
     List<Movie> retrieveTop5ExpensiveMovies();
 
 

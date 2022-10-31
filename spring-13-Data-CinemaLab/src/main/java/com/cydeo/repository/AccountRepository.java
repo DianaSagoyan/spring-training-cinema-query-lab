@@ -18,7 +18,7 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
     List<Account> findByCountryOrState(String country, String state);
 
     //Write a derived query to list all accounts with age lower than or equal to a specific value
-    List<Account> findByAgeBefore(int age);
+    List<Account> findByAgeLessThanEqual(int age);
 
     //Write a derived query to list all accounts with a specific role
     List<Account> findByRole(UserRole role);
@@ -30,7 +30,7 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
     List<Account> findByAddressStartsWith(String pattern);
 
     //Write a derived query to sort the list of accounts with age
-    List<Account> findAccountsByOrderByAge();
+    List<Account> findByOrderByAge();
 
     // ------------------- JPQL QUERIES ------------------- //
 
@@ -54,7 +54,9 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
     List<Account> retrieveAccountsWhereAgeLowerThan(@Param("age")int age);
 
     //Write a native query to read all accounts that a specific value can be containable in the name, address, country, state city
-    @Query(nativeQuery = true, value = "select * from account_details where in (name, address, country, state, city) like :str")//?
+    @Query(value = "select * from account_details where name ilike concat('%',?1,'%')" +
+            "or address ilike concat('%',?1,'%') or country ilike concat('%',?1,'%')" +
+            "or state ilike concat('%',?1,'%')or city ilike concat('%',?1,'%')", nativeQuery = true)
     List<Account> retrieveAccountsContainableInNameAddressCountryState(@Param("str") String str);
 
     //Write a native query to read all accounts with an age higher than a specific value

@@ -23,7 +23,7 @@ public class QueryDemo implements CommandLineRunner {
     public void run(String... args) throws Exception {
         System.out.println("------------------Account---------------------");
         System.out.println("Account Query: " + accountRepository.retrieveAccounts());
-        System.out.println("Find By Age: " + accountRepository.findByAgeBefore(47));
+        System.out.println("Find By Age: " + accountRepository.findByAgeLessThanEqual(47));
         System.out.println("Find By Country or state: " + accountRepository.findByCountryOrState("United States", "Virginia"));
         System.out.println("Accounts where age is lower than: " + accountRepository.retrieveAccountsWhereAgeLowerThan(40));
         System.out.println("Age higher than: " + accountRepository.retrieveAgeHigherThan(25));

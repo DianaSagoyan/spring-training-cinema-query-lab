@@ -5,29 +5,30 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
     // ------------------- DERIVED QUERIES ------------------- //
 
     //Write a derived query to read a user with an email?
-    User findByEmail(String email); // ?
+    Optional<User> findByEmail(String email); // ?
 
 
     //Write a derived query to read a user with a username?
-    User findByUsername(String username);
+    Optional<User> findByUsername(String username);
 
 
     //Write a derived query to list all users that contain a specific name?
-    List<User> findByUsernameContains(String name);
+    List<User> findByAccountNameContaining(String name);
 
 
     //Write a derived query to list all users that contain a specific name in the ignore case mode?
-    List<User> findByAccountContainingIgnoreCase(String name);
+    List<User> findByAccountNameContainingIgnoreCase(String name);
 
 
     //Write a derived query to list all users with an age greater than a specified age?
-    List<User> findByAccount_AgeAfter(int age);
+    List<User> findByAccountAgeGreaterThan(int age);
 
 
     // ------------------- JPQL QUERIES ------------------- //
@@ -50,7 +51,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     // ------------------- Native QUERIES ------------------- //
 
     //Write a native query that returns all users that contain a specific name?
-    @Query(nativeQuery = true, value = "select * from user_account where username = ?1")
+    @Query(nativeQuery = true, value = "select * from user_account u " +
+            "join account_details ad on ad.id = u.acciunt_details_id where ad.name like concat('%',?1, '%' ) ")
     List<User> retrieveUserWithName(String name);
 
 
@@ -60,12 +62,12 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 
     //Write a native query that returns all users in the range of ages?
-    @Query(nativeQuery = true, value = "select * from user_account join account_details a where a.age between ?1 and ?2")
+    @Query(nativeQuery = true, value = "select * from user_account u join account_details a on a.id = u.account_details_id where a.age between ?1 and ?2")
     List<User> retrieveUserInAgeRange(int age1, int age2);
 
 
     //Write a native query to read a user by email?
-    @Query(nativeQuery = true, value = "select * from user_account join account_details a where a.email = ?1")
+    @Query(nativeQuery = true, value = "select * from user_account where email = ?1")
     List<User> retrieveUserByUsingEmail(String email);
 
 
